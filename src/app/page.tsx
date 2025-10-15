@@ -1,9 +1,19 @@
-import { Search } from "lucide-react";
 import SearchForm from "@/components/search-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Search,
+  Laptop,
+  Smartphone,
+  Palette,
+  TrendingUp,
+  Pen,
+  Database,
+  FileText,
+  Video,
+} from "lucide-react";
 {
   /*Provisional data for freelancer, this data is suposed to be retrieved from the database*/
 }
@@ -62,6 +72,76 @@ const freelancers = [
       "Analytical expert turning complex data into actionable insights using machine learning and AI.",
     skills: ["Python", "TensorFlow", "SQL"],
     avatar: "",
+  },
+];
+
+{
+  /*Provisional data for services, this data is suposed to be retrieved from the database*/
+}
+const services = [
+  {
+    id: 1,
+    service: "Web Development",
+    description:
+      "Professional web development services including responsive design, modern frameworks, and optimized performance.",
+    category: "Software Development",
+    icon: Laptop,
+  },
+  {
+    id: 2,
+    service: "Mobile App Development",
+    description:
+      "Native and cross-platform mobile applications for iOS and Android with seamless user experiences.",
+    category: "Software Development",
+    icon: Smartphone,
+  },
+  {
+    id: 3,
+    service: "UI/UX Design",
+    description:
+      "User-centered design solutions that combine aesthetics with functionality for optimal user engagement.",
+    category: "Design & Creative",
+    icon: Palette,
+  },
+  {
+    id: 4,
+    service: "Digital Marketing",
+    description:
+      "Comprehensive digital marketing strategies including SEO, social media, and content marketing campaigns.",
+    category: "Marketing & Sales",
+    icon: TrendingUp,
+  },
+  {
+    id: 5,
+    service: "Graphic Design",
+    description:
+      "Creative graphic design services for branding, logos, illustrations, and visual content creation.",
+    category: "Design & Creative",
+    icon: Pen,
+  },
+  {
+    id: 6,
+    service: "Data Analysis",
+    description:
+      "Advanced data analytics and visualization to transform raw data into actionable business insights.",
+    category: "Data & Analytics",
+    icon: Database,
+  },
+  {
+    id: 7,
+    service: "Content Writing",
+    description:
+      "Engaging and SEO-optimized content creation for blogs, websites, and marketing materials.",
+    category: "Writing & Translation",
+    icon: FileText,
+  },
+  {
+    id: 8,
+    service: "Video Editing",
+    description:
+      "Professional video editing and post-production services for promotional, educational, and creative content.",
+    category: "Video & Animation",
+    icon: Video,
   },
 ];
 
@@ -163,6 +243,43 @@ export default function Home() {
             >
               View All Freelancers
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Service categories*/}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-foreground mb-4">
+              Browse by category
+            </h3>
+            <p className="text-muted-foreground text-lg">
+              Find the right talent for your specifics needs
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service) => {
+              const IconComponent = service.icon;
+              return (
+                <Card
+                  key={service.id}
+                  className="hover:shadow-lg transition-all duration-300 cursor-pointer group border-border hover:border-primary/50"
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg mb-4 bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent className="h-8 w-8 text-primary" />
+
+                    </div>
+                    <h4 className="font-semibold text-foreground text-lg mb-2 group-hover:text-primary transition-colors">
+                      {service.service}
+                    </h4>
+                    <p className="text-muted-foreground text-sm mb-3">{service.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
