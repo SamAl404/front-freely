@@ -270,16 +270,38 @@ export default function Home() {
                   <CardContent className="p-6 text-center">
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg mb-4 bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="h-8 w-8 text-primary" />
-
                     </div>
                     <h4 className="font-semibold text-foreground text-lg mb-2 group-hover:text-primary transition-colors">
                       {service.service}
                     </h4>
-                    <p className="text-muted-foreground text-sm mb-3">{service.description}</p>
+                    <p className="text-muted-foreground text-sm mb-3">
+                      {service.description}
+                    </p>
                   </CardContent>
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+      {/* CTA Section */}
+      <section className="py-16 bg-primary">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="text-3xl font-bold text-primary-foreground mb-4">
+            Ready to get started?
+          </h3>
+          <p className="text-primary-foreground/90 text-lg mb-8 max-w-2xl mx-auto">
+            Join thousands of businesses that trust Freely to connect them
+            with top freelance talent.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-primary-foregorund text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
+            >
+              Find Freelancers
+            </Button>
           </div>
         </div>
       </section>
