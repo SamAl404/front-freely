@@ -153,7 +153,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-6xl md:text-6xl font-bold text-foreground mb-6 text-balance leading-snug">
             Find the perfect <br />
-            <span className="text-green-700">freelancer</span> for your project
+            <span className="text-green-700">freelancer</span> for your project.
           </h2>
           <p className="text-xl text-muted-foreground m-10 max-w-2xl mx-auto text-pretty">
             Connect with talented professionals from around the world. Get your
@@ -186,7 +186,7 @@ export default function Home() {
             {freelancers.map((freelancer) => (
               <Card
                 key={freelancer.id}
-                className="hover:shadow-lg transition-shadow duration-300 border-border"
+                className="hover:shadow-lg transition-shadow duration-300 border-border p-0"
               >
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4 mb-4">
@@ -226,8 +226,8 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <div className="flex justify-end">
-                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <div className="flex">
+                    <Button className="bg-primary w-full text-primary-foreground hover:bg-primary/90">
                       View Profile
                     </Button>
                   </div>
