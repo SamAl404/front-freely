@@ -19,10 +19,25 @@ export default function Home() {
             <div className="flex gap-2">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-                <Input/>
+                <Input />
                 <Button></Button>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured freelancers */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-foreground mb-4">
+              Featured Freelancers
+            </h3>
+            <p className="text-muted-foreground text-lg">
+              Discover top-rated proffesionals ready to bring your vision to
+              life
+            </p>
           </div>
         </div>
       </section>
