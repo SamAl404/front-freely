@@ -1,6 +1,9 @@
 import { Search } from "lucide-react";
 import SearchForm from "@/components/search-form";
-
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 {
   /*Provisional data for freelancer, this data is suposed to be retrieved from the database*/
 }
@@ -17,8 +20,49 @@ const freelancers = [
   },
   {
     id: 2,
-    
-  }
+    name: "David Lee",
+    title: "UI/UX Designer",
+    description:
+      "Creative designer focused on user-centered design with a passion for creating intuitive interfaces.",
+    skills: ["Figma", "Adobe XD", "Photoshop"],
+    avatar: "",
+  },
+  {
+    id: 3,
+    name: "Maria Rodriguez",
+    title: "Mobile App Developer",
+    description:
+      "Expert in building cross-platform mobile applications with a focus on performance and user experience.",
+    skills: ["React Native", "Flutter", "Swift"],
+    avatar: "",
+  },
+  {
+    id: 4,
+    name: "James Wilson",
+    title: "Digital Marketing Specialist",
+    description:
+      "Results-driven marketer with expertise in SEO, content strategy, and social media campaigns.",
+    skills: ["SEO", "Google Ads", "Content Marketing"],
+    avatar: "",
+  },
+  {
+    id: 5,
+    name: "Emily Taylor",
+    title: "Graphic Designer",
+    description:
+      "Creative professional specializing in brand identity, illustration, and visual storytelling.",
+    skills: ["Illustrator", "Photoshop", "Branding"],
+    avatar: "",
+  },
+  {
+    id: 6,
+    name: "Alex Kumar",
+    title: "Data Scientist",
+    description:
+      "Analytical expert turning complex data into actionable insights using machine learning and AI.",
+    skills: ["Python", "TensorFlow", "SQL"],
+    avatar: "",
+  },
 ];
 
 export default function Home() {
@@ -58,7 +102,68 @@ export default function Home() {
               life
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {freelancers.map((freelancer) => (
+              <Card
+                key={freelancer.id}
+                className="hover:shadow-lg transition-shadow duration-300 border-border"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4 mb-4">
+                    <Avatar className="h-16 w-16">
+                      <AvatarImage
+                        src={freelancer.avatar || "/placeholder.svg"}
+                        alt={freelancer.name}
+                      />
+                      <AvatarFallback>
+                        {freelancer.name
+                          .split(" ")
+                          .map((name) => name[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-foreground text-lg">
+                        {freelancer.name}
+                      </h4>
+                      <p className="text-muted-foreground">
+                        {freelancer.title}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foregroud text-sm mb-4">
+                    {freelancer.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {freelancer.skills.map((skill) => (
+                      <Badge
+                        key={skill}
+                        variant="secondary"
+                        className="bg-green-700 text-white text-sm font-medium hover:bg-green-800"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+
+                  <div className="flex justify-end">
+                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                      View Profile
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+            >
+              View All Freelancers
+            </Button>
+          </div>
         </div>
       </section>
     </div>
