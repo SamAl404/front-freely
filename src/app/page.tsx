@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/navbar";
 import {
   Search,
   Laptop,
@@ -148,6 +149,9 @@ const services = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Navbar */}
+      <Navbar></Navbar>
+
       {/* Hero section*/}
       <section className="py-16 bg-gradient-to-br from-background to-muted">
         <div className="container mx-auto px-4 text-center">
