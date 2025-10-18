@@ -1,4 +1,14 @@
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Avatar } from "@/components/ui/avatar";
+import { UserCircle2Icon, ChevronDown } from "lucide-react";
+
+const isAuthenticated = true;
 
 export default function Navbar() {
   return (
@@ -26,15 +36,47 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3 shrink-0 w-32 justify-end">
-          <Button
-            variant="ghost"
-            className="cursor-pointer border hover:border-green-800 transition-colors  duration-300"
-          >
-            Log In
-          </Button>
-          <Button className="cursor-pointer bg-green-700 hover:bg-green-800 ">
-            Sign Up
-          </Button>
+          {!isAuthenticated ? (
+            <>
+              <Button
+                variant="ghost"
+                className="cursor-pointer border hover:border-green-800 transition-colors  duration-300"
+              >
+                Log In
+              </Button>
+              <Button className="cursor-pointer bg-green-700 hover:bg-green-800 ">
+                Sign Up
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button className="cursor-pointer bg-green-700 hover:bg-green-800 ">
+                Dashboard
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="cursor-pointer flex items-center gap-2 align-bottom">
+                  <Avatar>
+                    <UserCircle2Icon className="w-full h-full shrink-0"></UserCircle2Icon>
+                  </Avatar>
+                  <ChevronDown className="h-4 w-4"/>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="cursor-pointer">
+                  <DropdownMenuItem>
+                    <a href="#">Dashboard</a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <a href="#">Profile</a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="text-red-600 
+                  "
+                  >
+                    <a href="#">Sign Out</a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          )}
         </div>
       </div>
     </header>
