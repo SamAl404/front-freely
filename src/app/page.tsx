@@ -14,10 +14,14 @@ import {
   Database,
   FileText,
   Video,
+  LucideIcon,
 } from "lucide-react";
-{
-  /*Provisional data for freelancer, this data is suposed to be retrieved from the database*/
-}
+
+type Service = {
+  id: number;
+  service: string;
+  description: string;
+};
 
 const freelancers = [
   {
@@ -80,7 +84,7 @@ const freelancers = [
   /*Provisional data for services, this data is suposed to be retrieved from the database*/
 }
 
-const serviceIcons: { [key: number]: any } = {
+const serviceIcons: Record<number, LucideIcon> = {
   7: Laptop, // Web Development
   8: Smartphone, // Mobile App Development
   9: Palette, // UI/UX Design
@@ -91,7 +95,7 @@ const serviceIcons: { [key: number]: any } = {
   14: Video,
 };
 
-const services1 = async (): Promise<any[]> => {
+const services = async () => {
   try {
     const res = await fetch("http://localhost:8080/api/services", {
       method: "GET",
@@ -114,7 +118,7 @@ const services1 = async (): Promise<any[]> => {
 };
 
 export default async function Home() {
-  const services = await services1();
+  const servicesData = await services();
   return (
     <div className="min-h-screen bg-background">
       {/* Navbar */}
@@ -232,7 +236,7 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => {
+            {servicesData.map((service) => {
               const IconComponent = serviceIcons[service.id] || Laptop;
               return (
                 <Card
