@@ -146,7 +146,41 @@ const services = [
   },
 ];
 
-export default function Home() {
+const serviceIcons: { [key: number]: any } = {
+  7: Laptop, // Web Development
+  8: Smartphone, // Mobile App Development
+  9: Palette, // UI/UX Design
+  10: TrendingUp, // Digital Marketing
+  11: Pen, // Graphic Design
+  12: Database, // Data Analysis
+  13: FileText, // Content Writing
+  14: Video,
+};
+
+const services1 = async (): Promise<any[]> => {
+  try {
+    const res = await fetch("http://localhost:8080/api/services", {
+      method: "GET",
+      // If this is a Next.js server component and you want fresh data each request:
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch services: ${res.status} ${res.statusText}`
+      );
+    }
+
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.error("Error fetching services:", err);
+    return [];
+  }
+};
+
+export default async function Home() {
+  const services = await services1();
   return (
     <div className="min-h-screen bg-background">
       {/* Navbar */}
@@ -265,7 +299,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service) => {
-              const IconComponent = service.icon;
+              const IconComponent = serviceIcons[service.id] || Laptop;
               return (
                 <Card
                   key={service.id}
@@ -295,8 +329,8 @@ export default function Home() {
             Ready to get started?
           </h3>
           <p className="text-primary-foreground/90 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of businesses that trust Freely to connect them
-            with top freelance talent.
+            Join thousands of businesses that trust Freely to connect them with
+            top freelance talent.
           </p>
           <div className="flex flex-col sm:flex-row justify-center">
             <Button
