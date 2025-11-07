@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar } from "@/components/ui/avatar";
 import { UserCircle2Icon, ChevronDown } from "lucide-react";
-
-const isAuthenticated = true;
+import Link from "next/link";
+const isAuthenticated = false;
 
 export default function Navbar() {
   return (
@@ -38,15 +38,20 @@ export default function Navbar() {
         <div className="flex items-center gap-3 shrink-0 w-32 justify-end">
           {!isAuthenticated ? (
             <>
-              <Button
-                variant="ghost"
-                className="cursor-pointer border hover:border-green-800 transition-colors  duration-300"
-              >
-                Log In
-              </Button>
-              <Button className="cursor-pointer bg-green-700 hover:bg-green-800 ">
-                Sign Up
-              </Button>
+              <Link href="/login">
+                <Button
+                  variant="ghost"
+                  className="cursor-pointer border hover:border-green-800 transition-colors  duration-300"
+                >
+                  Log In
+                </Button>
+              </Link>
+
+              <Link href="/signup">
+                <Button className="cursor-pointer bg-green-700 hover:bg-green-800 ">
+                  Sign Up
+                </Button>
+              </Link>
             </>
           ) : (
             <>
@@ -58,7 +63,7 @@ export default function Navbar() {
                   <Avatar>
                     <UserCircle2Icon className="w-full h-full shrink-0"></UserCircle2Icon>
                   </Avatar>
-                  <ChevronDown className="h-4 w-4"/>
+                  <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="cursor-pointer">
                   <DropdownMenuItem>

@@ -14,10 +14,14 @@ import {
   Database,
   FileText,
   Video,
+  LucideIcon,
 } from "lucide-react";
-{
-  /*Provisional data for freelancer, this data is suposed to be retrieved from the database*/
-}
+
+type Service = {
+  id: number;
+  service: string;
+  description: string;
+};
 
 const freelancers = [
   {
@@ -79,74 +83,42 @@ const freelancers = [
 {
   /*Provisional data for services, this data is suposed to be retrieved from the database*/
 }
-const services = [
-  {
-    id: 1,
-    service: "Web Development",
-    description:
-      "Professional web development services including responsive design, modern frameworks, and optimized performance.",
-    category: "Software Development",
-    icon: Laptop,
-  },
-  {
-    id: 2,
-    service: "Mobile App Development",
-    description:
-      "Native and cross-platform mobile applications for iOS and Android with seamless user experiences.",
-    category: "Software Development",
-    icon: Smartphone,
-  },
-  {
-    id: 3,
-    service: "UI/UX Design",
-    description:
-      "User-centered design solutions that combine aesthetics with functionality for optimal user engagement.",
-    category: "Design & Creative",
-    icon: Palette,
-  },
-  {
-    id: 4,
-    service: "Digital Marketing",
-    description:
-      "Comprehensive digital marketing strategies including SEO, social media, and content marketing campaigns.",
-    category: "Marketing & Sales",
-    icon: TrendingUp,
-  },
-  {
-    id: 5,
-    service: "Graphic Design",
-    description:
-      "Creative graphic design services for branding, logos, illustrations, and visual content creation.",
-    category: "Design & Creative",
-    icon: Pen,
-  },
-  {
-    id: 6,
-    service: "Data Analysis",
-    description:
-      "Advanced data analytics and visualization to transform raw data into actionable business insights.",
-    category: "Data & Analytics",
-    icon: Database,
-  },
-  {
-    id: 7,
-    service: "Content Writing",
-    description:
-      "Engaging and SEO-optimized content creation for blogs, websites, and marketing materials.",
-    category: "Writing & Translation",
-    icon: FileText,
-  },
-  {
-    id: 8,
-    service: "Video Editing",
-    description:
-      "Professional video editing and post-production services for promotional, educational, and creative content.",
-    category: "Video & Animation",
-    icon: Video,
-  },
-];
 
-export default function Home() {
+const serviceIcons: Record<number, LucideIcon> = {
+  7: Laptop, // Web Development
+  8: Smartphone, // Mobile App Development
+  9: Palette, // UI/UX Design
+  10: TrendingUp, // Digital Marketing
+  11: Pen, // Graphic Design
+  12: Database, // Data Analysis
+  13: FileText, // Content Writing
+  14: Video,
+};
+
+const services = async () => {
+  try {
+    const res = await fetch("http://localhost:8080/api/services", {
+      method: "GET",
+      // If this is a Next.js server component and you want fresh data each request:
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch services: ${res.status} ${res.statusText}`
+      );
+    }
+
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.error("Error fetching services:", err);
+    return [];
+  }
+};
+
+export default async function Home() {
+  const servicesData = await services();
   return (
     <div className="min-h-screen bg-background">
       {/* Navbar */}
@@ -264,8 +236,8 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => {
-              const IconComponent = service.icon;
+            {servicesData.map((service) => {
+              const IconComponent = serviceIcons[service.id] || Laptop;
               return (
                 <Card
                   key={service.id}
@@ -295,8 +267,8 @@ export default function Home() {
             Ready to get started?
           </h3>
           <p className="text-primary-foreground/90 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of businesses that trust Freely to connect them
-            with top freelance talent.
+            Join thousands of businesses that trust Freely to connect them with
+            top freelance talent.
           </p>
           <div className="flex flex-col sm:flex-row justify-center">
             <Button
