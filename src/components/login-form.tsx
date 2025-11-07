@@ -83,7 +83,7 @@ export default function LoginForm() {
           </Button>
           <div className="text-center pt-4">
             <p className="text-sm text-muted-foreground">
-              Don't have an account?{" "}
+              {"Don't"} have an account?{" "}
               <button
                 type="button"
                 className="text-primary hover:text-primary/80 font-medium transition-colors"
